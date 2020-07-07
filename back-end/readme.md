@@ -11,7 +11,6 @@
 - Utilizar Amazon SES para envios em produção.
 - O envio de e-mails deve acontecer em segundo plano (background job).
 
-
 **RN**
 
 - O link enviado por e-mail para resetar senha, deve expirar em 2h.
