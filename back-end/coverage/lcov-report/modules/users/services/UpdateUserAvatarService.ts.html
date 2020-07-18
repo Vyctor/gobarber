@@ -15,41 +15,41 @@
         }
     </style>
 </head>
-    
+
 <body>
 <div class='wrapper'>
     <div class='pad1'>
         <h1><a href="../../../index.html">All files</a> / <a href="index.html">modules/users/services</a> UpdateUserAvatarService.ts</h1>
         <div class='clearfix'>
-            
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>44/44</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">71.01% </span>
                 <span class="quiet">Branches</span>
                 <span class='fraction'>49/69</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">87.5% </span>
                 <span class="quiet">Functions</span>
                 <span class='fraction'>14/16</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>44/44</span>
             </div>
-        
-            
+
+
         </div>
         <p class="quiet">
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
@@ -154,7 +154,7 @@ import IStorageProvider from '@shared/container/providers/StorageProvider/models
 import IUsersRepository from '../repositories/IUsersRepository';
 &nbsp;
 interface IRequest {
-  userID: string;
+  user_id: string;
   avatarFilename: string;
 }
 &nbsp;
@@ -167,8 +167,8 @@ class UpdateUserAvatarService {
     private storageProvider: IStorageProvider,
   ) {}
 &nbsp;
-  public async execute({ userID, avatarFilename }: IRequest): Promise&lt;User&gt; {
-    const user = await this.usersRepository.findById(userID);
+  public async execute({ user_id, avatarFilename }: IRequest): Promise&lt;User&gt; {
+    const user = await this.usersRepository.findById(user_id);
 &nbsp;
     if (!user) {
       throw new AppError('Only authenticated users can change avatar.', 401);
@@ -209,4 +209,3 @@ export default UpdateUserAvatarService;<span class="fstat-no" title="function no
         <script src="../../../block-navigation.js"></script>
     </body>
 </html>
-    

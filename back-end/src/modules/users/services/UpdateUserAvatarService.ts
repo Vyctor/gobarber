@@ -7,7 +7,7 @@ import IStorageProvider from '@shared/container/providers/StorageProvider/models
 import IUsersRepository from '../repositories/IUsersRepository';
 
 interface IRequest {
-  userID: string;
+  user_id: string;
   avatarFilename: string;
 }
 
@@ -20,8 +20,8 @@ class UpdateUserAvatarService {
     private storageProvider: IStorageProvider,
   ) {}
 
-  public async execute({ userID, avatarFilename }: IRequest): Promise<User> {
-    const user = await this.usersRepository.findById(userID);
+  public async execute({ user_id, avatarFilename }: IRequest): Promise<User> {
+    const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
       throw new AppError('Only authenticated users can change avatar.', 401);

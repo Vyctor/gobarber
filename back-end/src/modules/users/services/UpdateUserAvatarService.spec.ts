@@ -20,7 +20,7 @@ describe('UpdateUserAvatar', () => {
     });
 
     await updateUserAvatar.execute({
-      userID: user.id,
+      user_id: user.id,
       avatarFilename: 'foto_muito_doida.jpg',
     });
 
@@ -37,7 +37,7 @@ describe('UpdateUserAvatar', () => {
 
     await expect(
       updateUserAvatar.execute({
-        userID: 'non-existing-user',
+        user_id: 'non-existing-user',
         avatarFilename: 'foto_muito_doida.jpg',
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -60,12 +60,12 @@ describe('UpdateUserAvatar', () => {
     });
 
     await updateUserAvatar.execute({
-      userID: user.id,
+      user_id: user.id,
       avatarFilename: 'foto_muito_doida.jpg',
     });
 
     await updateUserAvatar.execute({
-      userID: user.id,
+      user_id: user.id,
       avatarFilename: 'foto_muito_doida2.jpg',
     });
 
