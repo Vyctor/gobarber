@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { injectable, inject } from 'tsyringe';
+import path from 'path';
 
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
@@ -31,6 +32,13 @@ class SendForgotPasswordEmailService {
 
     const { token } = await this.userTokensRepository.generate(user.id);
 
+    const forgotPasswordTemplate = path.resolve(
+      __dirname,
+      '..',
+      'views',
+      'forgot_password.hbs',
+    );
+
     const emailData: ISendMailDTO = {
       to: {
         name: user.name,
@@ -38,10 +46,10 @@ class SendForgotPasswordEmailService {
       },
       subject: '[GoBarber] Recuperação de senha',
       templateData: {
-        template: 'Olá, {{name}}: {{token}}',
+        file: forgotPasswordTemplate,
         variables: {
           name: user.name,
-          token,
+          link: `http://localhost:3000/reset-password?token=${token}`,
         },
       },
     };
