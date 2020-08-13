@@ -23,6 +23,18 @@
 - [Mobile client](https://github.com/Vyctor/gobarber/tree/master/gobarberMobile)
   - Developed with React Native.
 
+
+## Installing Docker containers:
+
+**Docker Machine:** `docker-machine start && docker-machine env`
+
+**Postgres:** `docker run --name gobarber-postgres -p 5432:5432 -d -e POSTGRES_PASSWORD=docker postgres`
+
+**Mongo:** `docker run --name gobarber-mongo -p 27017:27017 -d mongo`
+
+**Redis:** `docker run --name gobarber-redis -p 6379:6379 -d redis:alpine`
+
+
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
