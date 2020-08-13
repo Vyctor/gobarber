@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { FiPower, FiClock } from 'react-icons/fi';
 import {
@@ -10,11 +10,14 @@ import {
   Schedule,
   Calendar,
   NextAppointment,
+  Section,
+  Appointment,
 } from './styles';
 import logoImg from '../../assets/logo.svg';
 import { useAuth } from '../../hooks/auth';
 
 const Dashboard: React.FC = () => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const { signOut, user } = useAuth();
 
   return (
@@ -46,6 +49,7 @@ const Dashboard: React.FC = () => {
             <span>Dia 06</span>
             <span>Segunda-feira</span>
           </p>
+
           <NextAppointment>
             <strong>Atendimento a seguir</strong>
             <div>
@@ -60,6 +64,96 @@ const Dashboard: React.FC = () => {
               </span>
             </div>
           </NextAppointment>
+
+          <Section>
+            <strong>Manhã</strong>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+
+              <div>
+                <img
+                  src="https://avatars3.githubusercontent.com/u/7526604?s=460&u=d7976001d5f90bbfe9776048a7814d850c08bbce&v=4"
+                  alt="Vyctor Guimarães"
+                />
+                <strong>Vyctor Guimarães</strong>
+              </div>
+            </Appointment>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+
+              <div>
+                <img
+                  src="https://avatars3.githubusercontent.com/u/7526604?s=460&u=d7976001d5f90bbfe9776048a7814d850c08bbce&v=4"
+                  alt="Vyctor Guimarães"
+                />
+                <strong>Vyctor Guimarães</strong>
+              </div>
+            </Appointment>
+            <Appointment>
+              <span>
+                <FiClock />
+                08:00
+              </span>
+
+              <div>
+                <img
+                  src="https://avatars3.githubusercontent.com/u/7526604?s=460&u=d7976001d5f90bbfe9776048a7814d850c08bbce&v=4"
+                  alt="Vyctor Guimarães"
+                />
+                <strong>Vyctor Guimarães</strong>
+              </div>
+            </Appointment>
+            <strong>Tarde</strong>
+            <Appointment>
+              <span>
+                <FiClock />
+                16:00
+              </span>
+
+              <div>
+                <img
+                  src="https://avatars3.githubusercontent.com/u/7526604?s=460&u=d7976001d5f90bbfe9776048a7814d850c08bbce&v=4"
+                  alt="Vyctor Guimarães"
+                />
+                <strong>Vyctor Guimarães</strong>
+              </div>
+            </Appointment>
+            <Appointment>
+              <span>
+                <FiClock />
+                16:00
+              </span>
+
+              <div>
+                <img
+                  src="https://avatars3.githubusercontent.com/u/7526604?s=460&u=d7976001d5f90bbfe9776048a7814d850c08bbce&v=4"
+                  alt="Vyctor Guimarães"
+                />
+                <strong>Vyctor Guimarães</strong>
+              </div>
+            </Appointment>
+            <Appointment>
+              <span>
+                <FiClock />
+                16:00
+              </span>
+
+              <div>
+                <img
+                  src="https://avatars3.githubusercontent.com/u/7526604?s=460&u=d7976001d5f90bbfe9776048a7814d850c08bbce&v=4"
+                  alt="Vyctor Guimarães"
+                />
+                <strong>Vyctor Guimarães</strong>
+              </div>
+            </Appointment>
+          </Section>
+
           <Calendar />
         </Schedule>
       </Content>
