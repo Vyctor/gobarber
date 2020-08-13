@@ -1,10 +1,9 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, ChangeEvent } from 'react';
 import { FiUser, FiMail, FiLock, FiCamera, FiArrowLeft } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { useHistory, Link } from 'react-router-dom';
-import api from '../../services/apiClient';
 
 import { useToast } from '../../hooks/toast';
 
@@ -15,6 +14,7 @@ import Button from '../../components/Button';
 
 import { Container, Content, AvatarInput } from './styles';
 import { useAuth } from '../../hooks/auth';
+import apiClient from '../../services/apiClient';
 
 interface ProfileFormData {
   name: string;
@@ -27,7 +27,7 @@ const Profile: React.FC = () => {
   const { addToast } = useToast();
   const history = useHistory();
 
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const handleSubmit = useCallback(
     async (data: ProfileFormData) => {
@@ -42,7 +42,7 @@ const Profile: React.FC = () => {
         });
         await schema.validate(data, { abortEarly: false });
 
-        await api.post('/users', data);
+        await apiClient.post('/users', data);
 
         history.push('/');
 
@@ -66,6 +66,25 @@ const Profile: React.FC = () => {
     },
     [addToast, history],
   );
+
+  const handleAvatarChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      if (event.target.files) {
+        const data = new FormData();
+
+        data.append('avatar', event.target.files[0]);
+
+        apiClient.patch('/users/avatar', data).then((response) => {
+          updateUser(response.data);
+          addToast({
+            type: 'success',
+            title: 'Avatar atualizado',
+          });
+        });
+      }
+    },
+    [addToast, updateUser],
+  );
   return (
     <Container>
       <header>
@@ -83,9 +102,10 @@ const Profile: React.FC = () => {
         >
           <AvatarInput>
             <img src={user.avatar_url} alt={user.name} />
-            <button type="button">
+            <label htmlFor="avatar">
               <FiCamera />
-            </button>
+              <input type="file" id="avatar" onChange={handleAvatarChange} />
+            </label>
           </AvatarInput>
 
           <h1>Meu perfil</h1>
