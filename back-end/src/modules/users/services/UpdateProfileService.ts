@@ -1,16 +1,17 @@
 import { injectable, inject } from 'tsyringe';
 
-import User from '@modules/users/infra/typeorm/entities/User';
 import AppError from '@shared/errors/AppError';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import IUsersRepository from '../repositories/IUsersRepository';
+
+import User from '../infra/typeorm/entities/User';
 
 interface IRequest {
   user_id: string;
   name: string;
   email: string;
-  password?: string;
   old_password?: string;
+  password?: string;
 }
 
 @injectable()
@@ -18,6 +19,7 @@ class UpdateProfileService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+
     @inject('HashProvider')
     private hashProvider: IHashProvider,
   ) {}
@@ -37,8 +39,8 @@ class UpdateProfileService {
 
     const userWithUpdatedEmail = await this.usersRepository.findByEmail(email);
 
-    if (userWithUpdatedEmail && user.id !== userWithUpdatedEmail.id) {
-      throw new AppError('E-mail already in use');
+    if (userWithUpdatedEmail && userWithUpdatedEmail.id !== user_id) {
+      throw new AppError('E-mail already in use.');
     }
 
     user.name = name;
