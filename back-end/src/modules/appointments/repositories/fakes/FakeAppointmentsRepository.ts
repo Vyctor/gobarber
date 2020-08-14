@@ -1,11 +1,12 @@
 import { uuid } from 'uuidv4';
 import { isEqual, getMonth, getYear, getDate } from 'date-fns';
-import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
 
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
 import IFindAllInMonthFromProviderDTO from '@modules/appointments/dtos/IFindAllInMonthFromProviderDTO';
 import IFindAllInDayFromProviderDTO from '@modules/appointments/dtos/IFindAllInDayFromProviderDTO';
+
+import Appointment from '../../infra/typeorm/entities/Appointment';
 
 class AppointmentsRepository implements IAppointmentsRepository {
   private appointments: Appointment[] = [];
@@ -21,20 +22,6 @@ class AppointmentsRepository implements IAppointmentsRepository {
     );
 
     return findAppointment;
-  }
-
-  public async create({
-    provider_id,
-    user_id,
-    date,
-  }: ICreateAppointmentDTO): Promise<Appointment> {
-    const appointment = new Appointment();
-
-    Object.assign(appointment, { id: uuid(), provider_id, date, user_id });
-
-    this.appointments.push(appointment);
-
-    return appointment;
   }
 
   public async findAllInMonthFromProvider({
@@ -54,9 +41,9 @@ class AppointmentsRepository implements IAppointmentsRepository {
 
   public async findAllInDayFromProvider({
     provider_id,
+    day,
     month,
     year,
-    day,
   }: IFindAllInDayFromProviderDTO): Promise<Appointment[]> {
     const appointments = this.appointments.filter(
       appointment =>
@@ -67,6 +54,20 @@ class AppointmentsRepository implements IAppointmentsRepository {
     );
 
     return appointments;
+  }
+
+  public async create({
+    provider_id,
+    user_id,
+    date,
+  }: ICreateAppointmentDTO): Promise<Appointment> {
+    const appointment = new Appointment();
+
+    Object.assign(appointment, { id: uuid(), date, provider_id, user_id });
+
+    this.appointments.push(appointment);
+
+    return appointment;
   }
 }
 

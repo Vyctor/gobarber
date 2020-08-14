@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 
@@ -8,7 +7,6 @@ import ProviderMonthAvailabilityController from '../controllers/ProviderMonthAva
 import ProviderDayAvailabilityController from '../controllers/ProviderDayAvailabilityController';
 
 const providersRouter = Router();
-
 const providersController = new ProvidersController();
 const providerMonthAvailabilityController = new ProviderMonthAvailabilityController();
 const providerDayAvailabilityController = new ProviderDayAvailabilityController();
@@ -30,7 +28,9 @@ providersRouter.get(
 providersRouter.get(
   '/:provider_id/day-availability',
   celebrate({
-    [Segments.PARAMS]: { provider_id: Joi.string().uuid().required() },
+    [Segments.PARAMS]: {
+      provider_id: Joi.string().uuid().required(),
+    },
   }),
   providerDayAvailabilityController.index,
 );

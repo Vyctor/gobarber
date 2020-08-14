@@ -4,8 +4,8 @@ import { classToClass } from 'class-transformer';
 
 import AuthenticateUserService from '@modules/users/services/AuthenticateUserService';
 
-class SessionsController {
-  async create(request: Request, response: Response): Promise<Response> {
+export default class SessionsController {
+  public async create(request: Request, response: Response): Promise<Response> {
     const { email, password } = request.body;
 
     const authenticateUser = container.resolve(AuthenticateUserService);
@@ -18,5 +18,3 @@ class SessionsController {
     return response.json({ user: classToClass(user), token });
   }
 }
-
-export default SessionsController;

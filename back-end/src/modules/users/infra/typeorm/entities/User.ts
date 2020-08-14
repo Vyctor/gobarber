@@ -6,8 +6,9 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import { Exclude, Expose } from 'class-transformer';
 import uploadConfig from '@config/upload';
+
+import { Exclude, Expose } from 'class-transformer';
 
 @Entity('users')
 class User {
@@ -21,11 +22,11 @@ class User {
   email: string;
 
   @Column()
-  avatar: string;
-
-  @Column()
   @Exclude()
   password: string;
+
+  @Column()
+  avatar: string;
 
   @CreateDateColumn()
   created_at: Date;

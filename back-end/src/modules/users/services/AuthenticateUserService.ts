@@ -1,15 +1,12 @@
-import 'reflect-metadata';
-
 import { sign } from 'jsonwebtoken';
+import authConfig from '@config/auth';
 import { injectable, inject } from 'tsyringe';
 
-import authConfig from '@config/auth';
-
 import AppError from '@shared/errors/AppError';
-
-import User from '@modules/users/infra/typeorm/entities/User';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
+
+import User from '../infra/typeorm/entities/User';
 
 interface IRequest {
   email: string;
@@ -26,6 +23,7 @@ class AuthenticateUserService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+
     @inject('HashProvider')
     private hashProvider: IHashProvider,
   ) {}
@@ -34,7 +32,7 @@ class AuthenticateUserService {
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
-      throw new AppError('Incorrect e-mail /password combination', 401);
+      throw new AppError('Incorrect email/password combination.', 401);
     }
 
     const passwordMatched = await this.hashProvider.compareHash(
@@ -43,7 +41,7 @@ class AuthenticateUserService {
     );
 
     if (!passwordMatched) {
-      throw new AppError('Incorrect e-mail /password combination', 401);
+      throw new AppError('Incorrect email/password combination.', 401);
     }
 
     const { secret, expiresIn } = authConfig.jwt;
@@ -53,10 +51,7 @@ class AuthenticateUserService {
       expiresIn,
     });
 
-    return {
-      user,
-      token,
-    };
+    return { user, token };
   }
 }
 

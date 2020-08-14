@@ -1,27 +1,33 @@
-import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
+import FakeAppointmentsRepository from '../repositories/fakes/FakeAppointmentsRepository';
 import ListProviderDayAvailabilityService from './ListProviderDayAvailabilityService';
 
 let fakeAppointmentsRepository: FakeAppointmentsRepository;
-let listProviderDayAvailability: ListProviderDayAvailabilityService;
+let listProviderDayAvailabilityService: ListProviderDayAvailabilityService;
 
-describe('ListProvidersDayAvailability', () => {
+describe('ListProviderDayAvailability', () => {
   beforeEach(() => {
     fakeAppointmentsRepository = new FakeAppointmentsRepository();
-
-    listProviderDayAvailability = new ListProviderDayAvailabilityService(
+    listProviderDayAvailabilityService = new ListProviderDayAvailabilityService(
       fakeAppointmentsRepository,
     );
   });
 
-  it('should be able to list the month availability from provider', async () => {
+  it('should be able to list the day availability from provider', async () => {
     await fakeAppointmentsRepository.create({
       provider_id: 'user',
-      user_id: '123123',
+      user_id: 'user',
+      date: new Date(2020, 4, 21, 9, 0, 0),
+    });
+
+    await fakeAppointmentsRepository.create({
+      provider_id: 'user',
+      user_id: 'user',
       date: new Date(2020, 4, 20, 14, 0, 0),
     });
+
     await fakeAppointmentsRepository.create({
       provider_id: 'user',
-      user_id: '123123',
+      user_id: 'user',
       date: new Date(2020, 4, 20, 15, 0, 0),
     });
 
@@ -29,7 +35,7 @@ describe('ListProvidersDayAvailability', () => {
       return new Date(2020, 4, 20, 11).getTime();
     });
 
-    const availability = await listProviderDayAvailability.execute({
+    const availability = await listProviderDayAvailabilityService.execute({
       provider_id: 'user',
       year: 2020,
       month: 5,
@@ -45,6 +51,7 @@ describe('ListProvidersDayAvailability', () => {
         { hour: 14, available: false },
         { hour: 15, available: false },
         { hour: 16, available: true },
+        { hour: 17, available: true },
       ]),
     );
   });

@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.77% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>77/83</span>
+                <span class='fraction'>85/85</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.18% </span>
+                <span class="strong">71.43% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>45/68</span>
+                <span class='fraction'>50/70</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.77% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>77/83</span>
+                <span class='fraction'>85/85</span>
             </div>
         
             
@@ -140,7 +140,9 @@
 <a name='L81'></a><a href='#L81'>81</a>
 <a name='L82'></a><a href='#L82'>82</a>
 <a name='L83'></a><a href='#L83'>83</a>
-<a name='L84'></a><a href='#L84'>84</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -177,32 +179,34 @@
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
@@ -223,17 +227,17 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import 'reflect-metadata';
-import { startOfHour, isBefore, getHours, format } from 'date-fns';
-import { inject, injectable } from 'tsyringe';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { startOfHour, isBefore, getHours, format } from 'date-fns';
+import { injectable, inject } from 'tsyringe';
 &nbsp;
-import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
-import AppError from '@shared/errors/AppError';
-import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
 import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
-import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 &nbsp;
-interface IRequest {
+import AppError from '@shared/errors/AppError';
+import INotificationsRepositiry from '@modules/notifications/repositories/INotificationsRepository';
+import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
+import Appointment from '../infra/typeorm/entities/Appointment';
+&nbsp;
+interface IRequestDTO {
   provider_id: string;
   user_id: string;
   date: Date;
@@ -246,7 +250,7 @@ class CreateAppointmentService {
     private appointmentsRepository: IAppointmentsRepository,
 &nbsp;
     @inject('NotificationsRepository')
-    private notificationsRepository: INotificationsRepository,
+    private notificationsRepository: INotificationsRepositiry,
 &nbsp;
     @inject('CacheProvider')
     private cacheProvider: ICacheProvider,
@@ -256,30 +260,32 @@ class CreateAppointmentService {
     provider_id,
     user_id,
     date,
-  }: IRequest): Promise&lt;Appointment&gt; {
+  }: IRequestDTO): Promise&lt;Appointment&gt; {
     const appointmentDate = startOfHour(date);
 &nbsp;
     if (isBefore(appointmentDate, Date.now())) {
-      throw new AppError("You can't create an appointment on a past date!");
+      throw new AppError("You can't create an appointment on a past date", 400);
     }
 &nbsp;
     if (user_id === provider_id) {
-      throw new AppError("You can't create an appointment with yourself!'");
+      throw new AppError("You can't create an appointment with yourself", 400);
     }
 &nbsp;
-    if (getHours(appointmentDate) &lt; 8 || getHours(appointmentDate) &gt; 17) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      throw new AppError(</span>
-<span class="cstat-no" title="statement not covered" >        'You cannot be able to create an appointment before 8AM or later 5PM',</span>
-<span class="cstat-no" title="statement not covered" >      );</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    if (getHours(appointmentDate) &lt; 8 || getHours(appointmentDate) &gt; 17) {
+      throw new AppError(
+        'You can only create appointment between 8am and 5pm',
+        400,
+      );
+    }
+&nbsp;
     const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(
       appointmentDate,
       provider_id,
     );
 &nbsp;
-    if (findAppointmentInSameDate) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >      throw new AppError('This appointment is already booked');</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+    if (findAppointmentInSameDate) {
+      throw new AppError('This appointment is already booked', 400);
+    }
 &nbsp;
     const appointment = await this.appointmentsRepository.create({
       provider_id,
@@ -287,11 +293,11 @@ class CreateAppointmentService {
       date: appointmentDate,
     });
 &nbsp;
-    const dateFormatted = format(appointmentDate, "dd/MM/yyyy 'às' HH:mm'h'");
+    const dateFormated = format(appointmentDate, "dd/MM/yyyy 'às' HH:mm'h'");
 &nbsp;
     await this.notificationsRepository.create({
       recipient_id: provider_id,
-      content: `Novo agendamento para ${dateFormatted}`,
+      content: `Novo agendamento para dia ${dateFormated}`,
     });
 &nbsp;
     await this.cacheProvider.invalidate(
@@ -305,7 +311,7 @@ class CreateAppointmentService {
   }
 }
 &nbsp;
-export default CreateAppointmentService;<span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>
+export default CreateAppointmentService;<span class="fstat-no" title="function not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -313,7 +319,7 @@ export default CreateAppointmentService;<span class="fstat-no" title="function n
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Aug 14 2020 10:25:36 GMT-0300 (Horário Padrão de Brasília)
+                at Fri Aug 14 2020 10:33:21 GMT-0300 (Horário Padrão de Brasília)
             </div>
         </div>
         <script src="../../prettify.js"></script>

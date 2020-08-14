@@ -1,9 +1,7 @@
-import AuthenticateUserService from '@modules/users/services/AuthenticateUserService';
-
-import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import AppError from '@shared/errors/AppError';
-
+import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
+import AuthenticateUserService from './AuthenticateUserService';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeHashProvider: FakeHashProvider;
@@ -22,37 +20,39 @@ describe('AuthenticateUser', () => {
 
   it('should be able to authenticate', async () => {
     const user = await fakeUsersRepository.create({
-      name: 'Vyctor',
-      email: 'dev.vyctor@gmail.com',
+      name: 'John Doe',
+      email: 'johndoe@example.com',
       password: '123456',
     });
 
     const response = await authenticateUser.execute({
-      email: 'dev.vyctor@gmail.com',
+      email: 'johndoe@example.com',
       password: '123456',
     });
 
     expect(response).toHaveProperty('token');
     expect(response.user).toEqual(user);
   });
+
   it('should not be able to authenticate with non existing user', async () => {
     await expect(
       authenticateUser.execute({
-        email: 'dev.vyctor@gmail.com',
+        email: 'johndoe@example.com',
         password: '123456',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
-  it('should be able to authenticate with wrong password', async () => {
+
+  it('should not be able to authenticate with wrong password', async () => {
     await fakeUsersRepository.create({
-      name: 'Vyctor',
-      email: 'dev.vyctor@gmail.com',
+      name: 'John Doe',
+      email: 'johndoe@example.com',
       password: '123456',
     });
 
     await expect(
       authenticateUser.execute({
-        email: 'dev.vyctor@gmail.com',
+        email: 'johndoe@example.com',
         password: 'wrong-password',
       }),
     ).rejects.toBeInstanceOf(AppError);

@@ -1,12 +1,10 @@
-import 'reflect-metadata';
 import { injectable, inject } from 'tsyringe';
 import path from 'path';
 
-import IUsersRepository from '@modules/users/repositories/IUsersRepository';
-import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
 import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
 import AppError from '@shared/errors/AppError';
-import ISendMailDTO from '@shared/container/providers/MailProvider/dtos/ISendMailDTO';
+import IUsersRepository from '../repositories/IUsersRepository';
+import IUserTokensRepository from '../repositories/IUserTokensRepository';
 
 interface IRequest {
   email: string;
@@ -17,8 +15,10 @@ class SendForgotPasswordEmailService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+
     @inject('MailProvider')
     private mailProvider: IMailProvider,
+
     @inject('UserTokensRepository')
     private userTokensRepository: IUserTokensRepository,
   ) {}
@@ -27,7 +27,7 @@ class SendForgotPasswordEmailService {
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
-      throw new AppError('User does not exists');
+      throw new AppError('User does not exists.');
     }
 
     const { token } = await this.userTokensRepository.generate(user.id);
@@ -39,7 +39,7 @@ class SendForgotPasswordEmailService {
       'forgot_password.hbs',
     );
 
-    const emailData: ISendMailDTO = {
+    await this.mailProvider.sendMail({
       to: {
         name: user.name,
         email: user.email,
@@ -52,9 +52,7 @@ class SendForgotPasswordEmailService {
           link: `${process.env.APP_WEB_URL}/reset-password?token=${token}`,
         },
       },
-    };
-
-    await this.mailProvider.sendMail(emailData);
+    });
   }
 }
 
